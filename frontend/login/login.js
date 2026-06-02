@@ -5,11 +5,7 @@ const signupCont = document.getElementById("signup");
 const loginForm = document.getElementById("login-form");
 const signupForm = document.getElementById("signup-form");
 
-loginLink.addEventListener("click", (e) => {
-  e.preventDefault();
-  loginCont.classList.remove("hidden");
-  signupCont.classList.add("hidden");
-});
+const API_URL = "http://localhost:5000/api/auth";
 
 createLink.addEventListener("click", (e) => {
   e.preventDefault();
@@ -17,10 +13,68 @@ createLink.addEventListener("click", (e) => {
   loginCont.classList.add("hidden");
 });
 
-loginForm.addEventListener("click", (e) => {
-    e.preventDefault();
+loginLink.addEventListener("click", (e) => {
+  e.preventDefault();
+  loginCont.classList.remove("hidden");
+  signupCont.classList.add("hidden");
 });
 
-signupForm.addEventListener("click", (e) => {
-    e.preventDefault();
-})
+signupForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const email = document.getElementById("signup-email").value;
+  const businessName = document.getElementById("business-name").value;
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("signup-pass").value;
+
+  try {
+        const response = await fetch(`${API_URL}/signup`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, businessName, username, password })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            alert(data.error || 'Signup failed');
+        } else {
+            alert('Account configured successfully! Redirecting to sign in...');
+            signupForm.reset();
+            signupCont.classList.add('hidden');
+            loginCont.classList.remove('hidden');
+        }
+    } catch (err) {
+        console.error(err);
+        alert('Could not bridge connection with the server.');
+    }
+});
+
+loginForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const email = document.getElementById('login-email').value;
+  const password = document.getElementById('login-pass').value;
+
+    try {
+        const response = await fetch(`${API_URL}/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            alert(data.error || 'Login verification failed');
+        } else {
+            localStorage.setItem('growssify_token', data.token);
+            localStorage.setItem('growssify_user', JSON.stringify(data.user));
+
+            window.location.href = '../dashboard/dash.html'; 
+        }
+    } catch (err) {
+        console.error(err);
+        alert('Could not bridge connection with the server.');
+    }
+});

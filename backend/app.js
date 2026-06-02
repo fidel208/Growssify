@@ -1,29 +1,16 @@
 const express = require("express");
 const cors = require("cors");
-const pool = require("./config/db");
+const authRoutes = require("./routes/authRoutes");
 require("dotenv").config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
 
+// Standard parsers
 app.use(cors());
 app.use(express.json());
 
-pool.query("SELECT NOW()", (err, res) => {
-  if (err) {
-    console.error("❌ Database connection failed:", err.message);
-  } else {
-    console.log(
-      "🚀 Growssify Database Connected Successfully at:",
-      res.rows[0].now,
-    );
-  }
-});
+// Mount Auth routes
+app.use("/api/auth", authRoutes);
 
-app.get("/", (req, res) => {
-  res.send("Growssify API is live and breathing...");
-});
-
-app.listen(PORT, () => {
-  console.log(`Backend server is spinning on port ${PORT}`);
-});
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server executing cleanly on port ${PORT}`));
