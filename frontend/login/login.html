@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Growssify - Login</title>
+    <link
+      rel="shortcut icon"
+      href="../images/Growssify logo-icon.png"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="../css/login.css" />
+  </head>
+  <body>
+    <article class="auth-container">
+      <section id="left-cont">
+        <p><b>Welcome to Growssify.</b></p>
+        <p>
+          Turn your daily transactional data into clear, actionable growth
+          strategies
+        </p>
+      </section>
+      <section id="login">
+        <div class="login">
+          <img id="logo-pic" src="../images/Growssify logo-icon.png" alt="growssify icon" />
+          <p>Welcome back</p>
+          <form method="get" id="login-form">
+            <span>
+              <label for="login-email">Email Address</label>
+              <input
+                type="email"
+                name="login-email"
+                id="login-email"
+                required
+              />
+            </span>
+            <span>
+              <label for="login-pass">Password</label>
+              <input
+                type="password"
+                name="login-pass"
+                id="login-pass"
+                required
+              />
+            </span>
+            <button type="submit">Login</button>
+            <p>
+              Don't have an account? <b><a href="" id="create-link">Sign up</a></b>
+            </p>
+          </form>
+        </div>
+      </section>
+      <section id="signup" class="hidden">
+        <div class="signup">
+          <div class="signup-words">
+            <img
+              id="logo-pic"
+              src="../images/Growssify logo-icon.png"
+              alt="growssify icon"
+            />
+            <p>Create an account</p>
+          </div>
+          <form method="post" id="signup-form">
+            <span>
+              <label for="signup-email">Email Address</label>
+              <input type="email" name="signup-email" id="signup-email" />
+            </span>
+            <span>
+              <label for="business-name">Business Name</label>
+              <input type="text" name="business-name" id="business-name" />
+            </span>
+            <div class="signup-names">
+              <span>
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username" />
+              </span>
+              <span>
+                <label for="signup-pass">Password</label>
+                <input type="password" name="signup-pass" id="signup-pass" />
+              </span>
+            </div>
+            <button type="submit">Sign up</button>
+            <p>
+              Have an account <b><a href="" id="login-link">Sign in</a></b>
+            </p>
+          </form>
+        </div>
+      </section>
+    </article>
+    <script src="login.js"></script>
+  </body>
+</html>
