@@ -29,12 +29,10 @@ exports.signup = async (req, res) => {
       [username, email, hashedPassword, businessName],
     );
 
-    res
-      .status(201)
-      .json({
-        message: "Account created successfully!",
-        user: newUser.rows[0],
-      });
+    res.status(201).json({
+      message: "Account created successfully!",
+      user: newUser.rows[0],
+    });
   } catch (err) {
     console.error(err.message);
     res.status(500).json({ error: "Server registration error" });
@@ -76,10 +74,79 @@ exports.login = async (req, res) => {
         id: user.user_id,
         username: user.username,
         businessName: user.business_name,
+        email: user.email,
       },
     });
   } catch (err) {
     console.error(err.message);
     res.status(500).json({ error: "Server authentication error" });
+  }
+};
+
+exports.updateProfile = async (req, res) => {
+  const { businessName, username, email } = req.body;
+
+  if (!username || !email) {
+    return res
+      .status(400)
+      .json({ error: "Username and email details are required fields" });
+  }
+
+  try {
+    const activeUserId = req.userId;
+
+    const updateQuery = `
+      UPDATE users 
+      SET business_name = $1, username = $2, email = $3 
+      WHERE user_id = $4 
+      RETURNING user_id, username, email, business_name;
+    `;
+
+    const result = await pool.query(updateQuery, [
+      businessName,
+      username,
+      email,
+      activeUserId,
+    ]);
+
+    if (result.rows.length === 0) {
+      return res
+        .status(404)
+        .json({ error: "User account profile records not found" });
+    }
+
+    res.json({
+      success: true,
+      message: "Profile account settings synced successfully",
+    });
+  } catch (err) {
+    console.error("Profile adjustment runtime exception:", err.message);
+    res.status(500).json({ error: "Server database update runtime failure" });
+  }
+};
+
+exports.deleteAccount = async (req, res) => {
+  try {
+    const activeUserId = req.userId;
+
+    const deleteQuery =
+      "DELETE FROM users WHERE user_id = $1 RETURNING user_id;";
+    const result = await pool.query(deleteQuery, [activeUserId]);
+
+    if (result.rows.length === 0) {
+      return res
+        .status(404)
+        .json({ error: "Account parameters matching target not found" });
+    }
+
+    res.json({
+      success: true,
+      message: "User records permanently removed from data arrays",
+    });
+  } catch (err) {
+    console.error("Account elimination tracking fault:", err.message);
+    res
+      .status(500)
+      .json({ error: "Server dataset execution processing fault" });
   }
 };

@@ -22,8 +22,11 @@
   <body>
     <aside>
       <div class="top">
-        <img src="../images/Growssify logo-icon.png" alt="Growssify-logo" />
-        <h1>Growssify</h1>
+        <span class="material-symbols-outlined" id="menu-icon"> menu </span>
+        <div class="logo-top">
+          <img src="../images/Growssify logo-icon.png" alt="Growssify-logo" />
+          <h1>Growssify</h1>
+        </div>
       </div>
       <nav>
         <a href="#dashboard" class="active"
@@ -61,13 +64,13 @@
             <p>Your sales today</p>
             <div class="amount-details">
               <i class="fa-solid fa-chart-line"></i>
-              <p><sup>Kes.</sup> 250</p>
+              <p><sup>Kes.</sup> <span id="dash-today-sales">0</span></p>
             </div>
           </span>
           <span>
             <div class="amount-details">
               <i class="fa-solid fa-chart-column"></i>
-              <p><sup>Kes.</sup> 5000</p>
+              <p><sup>Kes.</sup> <span id="dash-month-sales">0</span></p>
             </div>
             <p>Monthy sales</p>
           </span>
@@ -75,15 +78,15 @@
             <div class="pie-header">
               <p>Monthly Revenue Breakdown</p>
             </div>
-            <span class="pie"></span>
+            <span class="pie" id="dash-pie-chart"></span>
             <div class="pie-legend">
               <div class="legend-item">
                 <span class="dot profit-dot"></span>
-                <small>Profit (65%)</small>
+                <small>Profit (<span id="pie-profit-pct">0</span>%)</small>
               </div>
               <div class="legend-item">
                 <span class="dot expense-dot"></span>
-                <small>Expenses (35%)</small>
+                <small>Expenses (<span id="pie-expense-pct">0</span>%)</small>
               </div>
             </div>
           </span>
@@ -91,10 +94,9 @@
         <article class="dash-bottom">
           <div class="chart-header">
             <h3>Yearly Net Income</h3>
-            <p>Fiscal performance tracking matrix (12-Month View)</p>
           </div>
           <div class="chart-container-wrapper">
-            <div class="y-axis-labels">
+            <div class="y-axis-labels" id="y-axis-labels">
               <span>5000</span>
               <span>4000</span>
               <span>3000</span>
@@ -105,73 +107,73 @@
             <div class="bar-chart-canvas">
               <div class="chart-column">
                 <div class="bar-wrapper">
-                  <span class="bar-pill" style="height: 45%"></span>
+                  <span class="bar-pill" data-month="0" style="height: 0%"></span>
                 </div>
                 <span class="month-label">Jan</span>
               </div>
               <div class="chart-column">
                 <div class="bar-wrapper">
-                  <span class="bar-pill" style="height: 60%"></span>
+                  <span class="bar-pill" data-month="1" style="height: 0%"></span>
                 </div>
                 <span class="month-label">Feb</span>
               </div>
               <div class="chart-column">
                 <div class="bar-wrapper">
-                  <span class="bar-pill" style="height: 85%"></span>
+                  <span class="bar-pill"data-month="2" style="height: 0"></span>
                 </div>
                 <span class="month-label">Mar</span>
               </div>
               <div class="chart-column">
                 <div class="bar-wrapper">
-                  <span class="bar-pill" style="height: 40%"></span>
+                  <span class="bar-pill" data-month="3" style="height: 40%"></span>
                 </div>
                 <span class="month-label">Apr</span>
               </div>
               <div class="chart-column">
                 <div class="bar-wrapper">
-                  <span class="bar-pill" style="height: 95%"></span>
+                  <span class="bar-pill" data-month="4" style="height: 95%"></span>
                 </div>
                 <span class="month-label">May</span>
               </div>
               <div class="chart-column">
                 <div class="bar-wrapper">
-                  <span class="bar-pill" style="height: 10%"></span>
+                  <span class="bar-pill" data-month="5" style="height: 10%"></span>
                 </div>
                 <span class="month-label">Jun</span>
               </div>
               <div class="chart-column">
                 <div class="bar-wrapper">
-                  <span class="bar-pill" style="height: 0"></span>
+                  <span class="bar-pill" data-month="6" style="height: 0%"></span>
                 </div>
                 <span class="month-label">Jul</span>
               </div>
               <div class="chart-column">
                 <div class="bar-wrapper">
-                  <span class="bar-pill" style="height: 0"></span>
+                  <span class="bar-pill" data-month="7" style="height: 0%"></span>
                 </div>
                 <span class="month-label">Aug</span>
               </div>
               <div class="chart-column">
                 <div class="bar-wrapper">
-                  <span class="bar-pill" style="height: 0"></span>
+                  <span class="bar-pill" data-month="8" style="height: 0%"></span>
                 </div>
                 <span class="month-label">Sep</span>
               </div>
               <div class="chart-column">
                 <div class="bar-wrapper">
-                  <span class="bar-pill" style="height: 0"></span>
+                  <span class="bar-pill" data-month="9" style="height: 0"></span>
                 </div>
                 <span class="month-label">Oct</span>
               </div>
               <div class="chart-column">
                 <div class="bar-wrapper">
-                  <span class="bar-pill" style="height: 0"></span>
+                  <span class="bar-pill" data-month="10" style="height: 0"></span>
                 </div>
                 <span class="month-label">Nov</span>
               </div>
               <div class="chart-column">
                 <div class="bar-wrapper">
-                  <span class="bar-pill" style="height: 0"></span>
+                  <span class="bar-pill" data-month="11" style="height: 0"></span>
                 </div>
                 <span class="month-label">Dec</span>
               </div>
@@ -184,7 +186,7 @@
           <div class="revenue">
             <div class="day-revenue">
               <h3>Today's revenue</h3>
-              <p><sup>Kes.</sup>300</p>
+              <p><sup>Kes.</sup><span id="today-revenue-total">0</span></p>
             </div>
             <div class="adds">
               <button id="toggle-revenue-form" class="add-btn">
@@ -216,7 +218,7 @@
           <div class="expense">
             <div class="day-expense">
               <h3>Today's expense</h3>
-              <p><sup>Kes.</sup>300</p>
+              <p><sup>Kes.</sup><span id="today-expense-total">0</span></p>
             </div>
             <div class="adds">
               <button id="toggle-expense-form" class="add-btn">
@@ -248,7 +250,7 @@
         </article>
         <article class="payment-details">
           <h3>Activity</h3>
-          <table>
+          <table id="activity-table">
             <thead>
               <tr>
                 <th>Date</th>
@@ -258,7 +260,7 @@
                 <th>Time</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id="activity-tbody">
               <tr>
                 <td>06/06/2026</td>
                 <td>Printed some pages</td>
@@ -312,9 +314,119 @@
           </table>
         </article>
       </section>
-      <section id="help"></section>
-      <section id="settings"></section>
+      <section id="help">
+        <p>Having Issues? Contact the admin</p>
+        <div class="contact">
+          <form id="help-form">
+            <span>
+              <label for="help-business-name">Business Name</label>
+              <input
+                type="text"
+                name="help_business_name"
+                id="help-business-name"
+                placeholder="Enter your business name"
+                required
+              />
+            </span>
+            <span>
+              <label for="help-email">Email Address</label>
+              <input
+                type="email"
+                name="help_email"
+                id="help-email"
+                placeholder="your@email.com"
+                required
+              />
+            </span>
+            <span>
+              <label for="help-message">Message</label>
+              <textarea
+                name="help_message"
+                id="help-message"
+                placeholder="Enter your message"
+                required
+              ></textarea>
+            </span>
+            <span id="form-status"></span>
+            <button type="submit" id="help-button">Send Message</button>
+          </form>
+          <div class="admin">
+            <a href="mailto:fidelmuthomi007@gmail.com" target="_blank"
+              ><i class="fa-solid fa-envelope"></i> Email us</a
+            >
+            <a
+              href="https://wa.me/2540789455874?text=%E2%80%8E%20Helllo%20Fidel"
+              target="_blank"
+              ><i class="fa-brands fa-whatsapp"></i> Whatsapp</a
+            >
+            <a href="tel:+254789455874" target="_blank"
+              ><i class="fa-solid fa-phone"></i> Call us now</a
+            >
+          </div>
+        </div>
+      </section>
+      <section id="settings">
+        <article class="edit">
+          <p>Edit account details</p>
+          <form>
+            <span>
+              <label for="edit-business-name">Business Name</label>
+              <input
+                type="text"
+                name="edit-business-name"
+                id="edit-business-name"
+              />
+            </span>
+            <span>
+              <label for="edit-username">Username</label>
+              <input type="text" name="edit-username" id="edit-username" />
+            </span>
+            <span>
+              <label for="edit-email">Email Address</label>
+              <input type="email" name="edit-email" id="edit-email" />
+            </span>
+            <button type="submit" id="edit-submit-btn">Submit</button>
+          </form>
+        </article>
+        <article class="delete">
+          <button id="trigger-delete-btn">Delete account</button>
+          <span class="delete-account">
+            <p>
+              We are sorry to see you go. Before you proceed, please be aware
+              that deleting your account is
+              <strong>permanent and cannot be undone</strong>.
+            </p>
+            <p class="warning-lead">
+              By deleting your account, you will instantly lose access to:
+            </p>
+            <ul>
+              <li>
+                All saved financial records, ledgers, and transaction histories.
+              </li>
+              <li>
+                Your business profile settings, workflows, and dashboard
+                analytics.
+              </li>
+            </ul>
+            <span class="delete-actions">
+              <button class="btn-cancel">Keep My Account</button>
+              <button class="btn-confirm" id="confirm-delete-btn">
+                Confirm Deletion
+              </button>
+            </span>
+          </span>
+        </article>
+      </section>
     </main>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
+    ></script>
+    <script type="text/javascript">
+      (function () {
+        emailjs.init("0HlLIi5bANWkVi8Lb");
+      })();
+    </script>
     <script src="dash.js"></script>
   </body>
 </html>

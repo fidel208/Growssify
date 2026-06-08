@@ -16,7 +16,6 @@ body {
   background-color: #f1f5f9;
   display: flex;
   gap: 20px;
-  padding: 0 20px;
 }
 button {
   cursor: pointer;
@@ -30,18 +29,23 @@ aside {
   gap: 100px;
   float: left;
 }
+#menu-icon {
+  display: none;
+}
 .top {
+  padding: 30px;
+  height: 15%;
+}
+.logo-top {
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 30px;
-  justify-content: space-around;
-  height: 15%;
+  justify-content: space-evenly;
 }
-.top > img {
+.logo-top > img {
   width: 60px;
 }
-.top > h1 {
+.logo-top > h1 {
   font-size: 40px;
   color: #0f172a;
 }
@@ -92,9 +96,8 @@ header {
   height: 15%;
 }
 header > h2 {
-  font-size: 40px;
-  font-weight: normal;
-  color: #0f172a;
+  font-size: 30px;
+  color: #475569;
 }
 .user-details {
   display: flex;
@@ -202,12 +205,12 @@ header > h2 {
   text-align: center;
 }
 .pie {
-  display: block;
-  width: 150px;
-  height: 150px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
-  background: conic-gradient(#10b981 0% 65%, #3730a3 65% 100%);
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.03);
+  display: inline-block;
+  background: conic-gradient(#4f46e5 0% 100%);
+  transition: background 0.4s ease;
 }
 .pie-legend {
   display: flex;
@@ -411,7 +414,7 @@ header > h2 {
 .adds > form {
   display: flex;
   flex-direction: column;
-  max-width: 450px;
+  max-width: 500px;
   padding-left: 50px;
   gap: 10px;
   opacity: 0.15;
@@ -514,4 +517,495 @@ td {
   color: #475569;
   padding: 15px 10px;
   flex: 1;
+}
+
+#help {
+  width: 100%;
+  height: 82%;
+  border-radius: 20px;
+  background-color: white;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 10% 80%;
+  gap: 20px;
+  padding: 30px;
+}
+#help > p {
+  padding: 30px;
+  font-size: 25px;
+}
+.contact {
+  padding: 30px;
+  display: grid;
+  grid-template-columns: 40% 40%;
+  grid-template-rows: 100%;
+  gap: 100px;
+}
+.contact > form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.contact > form > span {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.contact > form > span > label {
+  color: #0f172a;
+}
+.contact > form > span > input {
+  max-width: 80%;
+  height: 40px;
+  padding: 10px;
+  border-radius: 12px;
+  font-size: 18px;
+  outline: none;
+  border: solid 1px #d1d3d6;
+}
+.contact > form > span > textarea {
+  height: 100px;
+  border-radius: 12px;
+  max-width: 80%;
+  padding: 10px;
+  font-size: 18px;
+  border: solid 1px #d1d3d6;
+  outline: none;
+}
+.contact > form > button {
+  color: white;
+  background-color: #3730a3;
+  height: 50px;
+  border-radius: 12px;
+  font-size: 20px;
+  max-width: 200px;
+  width: 100%;
+  margin-top: 10px;
+  border: none;
+  outline: none;
+  font-weight: bold;
+}
+.contact > form > button:hover {
+  font-weight: bold;
+  background-color: #4f46e5;
+}
+.admin {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 30px;
+}
+.admin > a {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #0c7552;
+}
+.admin > a:hover {
+  font-weight: bold;
+}
+
+#settings {
+  width: 100%;
+  height: 85%;
+  background-color: white;
+  border-radius: 20px;
+  display: grid;
+  grid-template-columns: 60% 40%;
+  grid-template-rows: 100%;
+}
+.edit {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.edit > p {
+  color: #475569;
+  font-size: 28px;
+}
+.edit > form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 80%;
+  padding: 20px;
+}
+.edit > form > span {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.edit > form > span > input {
+  height: 50px;
+  padding: 10px;
+  border: solid 1px #475569;
+  font-size: 20px;
+  border-radius: 12px;
+  outline: none;
+}
+.edit > form > span > label {
+  color: #475569;
+}
+.edit > form > button {
+  height: 50px;
+  font-size: 25px;
+  text-align: center;
+  color: white;
+  background-color: #3730a3;
+  border-radius: 12px;
+  max-width: 200px;
+  width: 100%;
+  margin-top: 10px;
+  border: none;
+  outline: none;
+  align-self: flex-end;
+}
+.edit > form > button:hover {
+  background-color: #0c7552;
+}
+.delete {
+  padding: 50px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+#trigger-delete-btn {
+  width: 200px;
+  font-size: 18px;
+  height: 40px;
+  color: white;
+  background-color: #e11d48;
+  border-radius: 12px;
+  padding: 5px;
+  border: none;
+  outline: none;
+}
+#trigger-delete-btn:hover {
+  background-color: #be123c;
+}
+.delete-account {
+  opacity: 0.15;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.delete-account.active-warning {
+  opacity: 1;
+  pointer-events: auto;
+}
+.warning-lead {
+  font-weight: 600;
+  color: #9f1239;
+  margin: 10px 0 5px 0;
+}
+.delete-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+.btn-cancel {
+  background-color: #10b981;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.btn-cancel:hover {
+  background-color: #0c7552;
+}
+.btn-confirm {
+  background-color: #e11d48;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.btn-confirm:hover {
+  background-color: #910f2f;
+}
+
+@media (max-width: 1150px) {
+  body {
+    font-size: 15px;
+    padding: 0 10px;
+    gap: 10px;
+    width: 100%;
+  }
+  aside {
+    width: 25%;
+    gap: 50px;
+  }
+  nav {
+    padding-left: 10px;
+  }
+  nav > a {
+    font-size: 22px;
+    padding: 15px;
+    height: 50px;
+  }
+  main {
+    width: 75%;
+  }
+  header {
+    padding-left: 15px;
+    height: 10%;
+  }
+  header > h2 {
+    font-size: 25px;
+  }
+  .logo-top {
+    display: flex;
+    flex-direction: column;
+  }
+  .logo-top > h1 {
+    font-size: 30px;
+  }
+  .logo-top > img {
+    width: 45px;
+  }
+  .user-details {
+    max-width: 280px;
+    gap: 15px;
+  }
+  #dashboard {
+    grid-template-rows: auto auto;
+    height: 90dvh;
+    overflow-y: auto;
+    padding-bottom: 30px;
+  }
+  .dash-top {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .dash-top > span {
+    width: 100%;
+    max-height: none;
+    padding: 25px;
+  }
+  .pie-card {
+    display: flex;
+    flex-direction: row !important;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    gap: 30px;
+  }
+  .pie {
+    max-width: 100px;
+    width: 100%;
+    height: 100px;
+  }
+  .pie-legend {
+    display: flex;
+    flex-direction: column;
+  }
+  .dash-bottom {
+    height: 400px;
+    padding: 20px;
+  }
+
+  #finance {
+    grid-template-rows: auto auto;
+    height: auto;
+    overflow-y: auto;
+    padding-bottom: 30px;
+    gap: 5px;
+  }
+  .payments {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  #help {
+    height: 90dvh;
+  }
+  .contact {
+    grid-template-columns: 100%;
+    grid-template-rows: 50% 50%;
+    gap: 30px;
+  }
+  .contact > form > span > input,
+  .contact > form > span > textarea {
+    max-width: 100%;
+  }
+  #settings {
+    grid-template-columns: 100%;
+    grid-template-rows: 50% 50%;
+    height: 90dvh;
+    overflow-y: auto;
+    gap: 20px;
+    padding-bottom: 30px;
+  }
+  .edit > form {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: 0;
+  }
+  aside {
+    width: 15%;
+    overflow: hidden;
+    float: left;
+    flex-shrink: 0;
+  }
+  .top {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: 5px;
+  }
+  #menu-icon {
+    display: flex;
+    font-size: 30px;
+    padding-top: 17px;
+    display: none;
+  }
+  .logo-top {
+    justify-content: flex-start;
+    padding-top: 15px;
+  }
+  .logo-top > h1 {
+    display: none;
+  }
+  nav {
+    padding-left: 0;
+  }
+  nav > a {
+    gap: 25px;
+  }
+  main {
+    display: flex;
+    flex-direction: column;
+    width: 80;
+    height: auto;
+    flex-grow: 1;
+  }
+  header {
+    display: flex;
+    flex-direction: row;
+    padding: 10;
+    flex-shrink: 0;
+  }
+  #dashboard {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+  }
+  .user-details {
+    display: none;
+  }
+  .payment-details {
+    width: auto;
+  }
+  .payment-details > h3 {
+    font-size: 20px;
+  }
+  .dash-top > span > p {
+    font-size: 20px;
+  }
+  .amount-details > p {
+    font-size: 20px;
+  }
+  .amount-details > i {
+    font-size: 40px;
+  }
+  .day-revenue > h3,
+  .day-expense > h3 {
+    font-size: 20px;
+  }
+  .pie-card {
+    display: flex;
+    flex-direction: column !important;
+    height: auto;
+  }
+  #finance {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+  }
+  .adds > form {
+    padding: 0;
+  }
+  #help {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: 15px;
+  }
+  #help > p {
+    padding: 10px 0 0 0 !important;
+    font-size: 20px !important;
+    font-weight: bold;
+    color: #0f172a;
+  }
+  .contact {
+    width: 100% !important;
+    padding: 10px 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 30px !important;
+  }
+  .contact > form {
+    width: 100% !important;
+    max-width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 15px !important;
+  }
+  .contact > form > span {
+    width: 100% !important;
+  }
+  .contact > form > span > input,
+  .contact > form > span > textarea {
+    max-width: 100% !important;
+    width: 100% !important;
+    font-size: 16px !important;
+  }
+  .contact > form > button {
+    max-width: 100%;
+    width: 100%;
+  }
+  .admin {
+    width: 100%;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  .admin > a {
+    font-size: 18px;
+    width: 100%;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  #settings {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .edit > form {
+    padding: 0;
+  }
+  .delete {
+    padding: 20px;
+  }
 }
