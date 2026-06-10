@@ -74,6 +74,9 @@ document.addEventListener("DOMContentLoaded", () => {
       });
       if (!response.ok) throw new Error("Could not retrieve ledger arrays");
       const transactions = await response.json();
+
+      cachedTransactions = transactions;
+
       let todayRevenue = 0,
         todayExpense = 0;
       let currentMonthRevenue = 0,
@@ -325,6 +328,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function setupSettingsBackend() {
     const editForm = document.getElementById("edit-profile-form");
     const confirmDeleteBtn = document.getElementById("confirm-delete-btn");
+    const editStatus = document.getElementById("edit-status");
 
     if (editForm) {
       editForm.addEventListener("submit", async (e) => {
@@ -349,20 +353,22 @@ document.addEventListener("DOMContentLoaded", () => {
           const data = await response.json();
 
           if (!response.ok) {
-            alert(data.error || "Failed to update profile details.");
+            editStatus.textContent = "Failed to update profile details.";
           } else {
-            alert("Account details updated successfully!");
+            editStatus.textContent = "Account details updated successfully..";
 
             localStorage.setItem(
               "growssify_user",
               JSON.stringify({ username, businessName, email }),
             );
 
-            window.location.reload();
+            setTimeout(() => {
+              window.location.reload();
+            }, 2000);
           }
         } catch (err) {
           console.error(err);
-          alert("Could not bridge connection with the server.");
+          editStatus.textContent = "Could not bridge connection with the server.";
         } finally {
           if (submitBtn) submitBtn.disabled = false;
         }
@@ -450,14 +456,14 @@ document.addEventListener("DOMContentLoaded", () => {
     aside?.classList.add("nav-open");
     overlay?.classList.add("active");
     if (menuIcon) menuIcon.style.setProperty("display", "none", "important");
-    if (closeIcon) closeIcon.style.setProperty("display", "flex", "important");
+    if (closeIcon) closeIcon.style.setProperty("display", "flex");
   }
 
   function closeNav() {
     aside?.classList.remove("nav-open");
     overlay?.classList.remove("active");
 
-    if (menuIcon) menuIcon.style.setProperty("display", "flex", "important");
+    if (menuIcon) menuIcon.style.setProperty("display", "flex");
     if (closeIcon) closeIcon.style.setProperty("display", "none", "important");
   }
 
@@ -555,6 +561,54 @@ document.addEventListener("DOMContentLoaded", () => {
     logoutLink.addEventListener("click", () => {
       localStorage.removeItem("growssify_token");
       localStorage.removeItem("growssify_user");
+    });
+  }
+
+  const exportBtn = document.getElementById("export-btn");
+
+  if (exportBtn) {
+    exportBtn.addEventListener("click", () => {
+      if (!cachedTransactions || cachedTransactions.length === 0) {
+        alert("There are no transaction records compiled to export yet.");
+        return;
+      }
+
+      let csvContent = "Date,Time,Description,Type,Amount (Kes)\n";
+
+      cachedTransactions.forEach((tx) => {
+        const txDateObj = new Date(tx.created_at);
+        const dateStr = txDateObj.toLocaleDateString("en-GB");
+        const timeStr = txDateObj.toLocaleTimeString("en-US", {
+          hour12: false,
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+
+        const cleanDesc = tx.description
+          ? tx.description.replace(/,/g, " ")
+          : "No Description";
+        const txType = tx.type || "Unknown";
+        const amount = tx.amount || 0;
+
+        csvContent += `${dateStr},${timeStr},${cleanDesc},${txType},${amount}\n`;
+      });
+
+      const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+
+      const downloadLink = document.createElement("a");
+      const currentDateString = new Date().toISOString().split("T")[0]; // YYYY-MM-DD
+
+      downloadLink.href = url;
+      downloadLink.setAttribute(
+        "download",
+        `Growssify_Statement_${currentDateString}.csv`,
+      );
+      downloadLink.style.visibility = "hidden";
+
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
     });
   }
 

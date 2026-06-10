@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../css/dash.css" />
     <link
       rel="shortcut icon"
-      href="../images/growssify-web-favicon.png"
+      href="../images/Growssify logo-icon.png"
       type="image/x-icon"
     />
     <link
@@ -300,7 +300,13 @@
           </div>
         </article>
         <article class="payment-details">
-          <h3>Activity</h3>
+          <div class="payment-head">
+            <h3>Activity</h3>
+            <button id="export-btn">
+              Export <span class="material-symbols-outlined"> download </span>
+            </button>
+          </div>
+          <p>Recent transactions</p>
           <table id="activity-table">
             <thead>
               <tr>
@@ -419,7 +425,8 @@
       <section id="settings">
         <article class="edit">
           <p>Edit account details</p>
-          <form>
+          <form id="edit-profile-form" autocomplete="off">
+            <p id="edit-status"></p>
             <span>
               <label for="edit-business-name">Business Name</label>
               <input
@@ -429,12 +436,12 @@
               />
             </span>
             <span>
-              <label for="edit-username">Username</label>
-              <input type="text" name="edit-username" id="edit-username" />
-            </span>
-            <span>
               <label for="edit-email">Email Address</label>
               <input type="email" name="edit-email" id="edit-email" />
+            </span>
+            <span>
+              <label for="edit-username">Username</label>
+              <input type="text" name="edit-username" id="edit-username" />
             </span>
             <button type="submit" id="edit-submit-btn">Submit</button>
           </form>
