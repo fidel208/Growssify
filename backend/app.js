@@ -6,11 +6,9 @@ require("dotenv").config();
 
 const app = express();
 
-// Standard parsers
 app.use(cors());
 app.use(express.json());
 
-// Mount Auth routes
 app.use("/api/auth", authRoutes);
 app.use("/api/finance", financeRoutes);
 
