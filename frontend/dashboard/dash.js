@@ -4,31 +4,36 @@ document.addEventListener("DOMContentLoaded", () => {
   const profileBusiness = document.getElementById("profile-business");
   const navLinks = document.querySelectorAll("aside nav a");
   const sections = document.querySelectorAll("main > section");
+  const aside = document.querySelector("aside");
+  const menuIcon = document.getElementById("menu-icon");
+  const closeIcon = document.getElementById("menu-close");
+  const nav = document.querySelector("aside nav");
 
   const API_URL = "http://localhost:5000/api/auth";
   const FIN_API_URL = "http://localhost:5000/api/finance";
-
   const token = localStorage.getItem("growssify_token");
 
-  sections.forEach((section) => {
-    if (section.id === "dashboard") {
-      section.style.display = window.innerWidth <= 768 ? "flex" : "grid";
-    } else {
-      section.style.display = "none";
-    }
-  });
+  function initSectionViews() {
+    sections.forEach((section) => {
+      if (section.id === "dashboard") {
+        section.style.display = window.innerWidth <= 768 ? "" : "grid";
+      } else {
+        section.style.display = "none";
+      }
+    });
+  }
+
+  initSectionViews();
 
   async function fetchUserProfile() {
     try {
       const storedUser = localStorage.getItem("growssify_user");
-
       if (!storedUser) {
         window.location.href = "../login/login.html";
         return;
       }
 
       const userPayload = JSON.parse(storedUser);
-
       if (welcomeMsg)
         welcomeMsg.textContent = `Hello ${userPayload.username || "User"}`;
       if (profileName) profileName.textContent = userPayload.username || "User";
@@ -56,7 +61,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const tbody = document.getElementById("activity-tbody");
     const revTotalSpan = document.getElementById("today-revenue-total");
     const expTotalSpan = document.getElementById("today-expense-total");
-
     const dashTodaySales = document.getElementById("dash-today-sales");
     const dashMonthSales = document.getElementById("dash-month-sales");
     const dashPieChart = document.getElementById("dash-pie-chart");
@@ -68,23 +72,18 @@ document.addEventListener("DOMContentLoaded", () => {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` },
       });
-
       if (!response.ok) throw new Error("Could not retrieve ledger arrays");
-
       const transactions = await response.json();
-
-      let todayRevenue = 0;
-      let todayExpense = 0;
-      let currentMonthRevenue = 0;
-      let currentMonthExpense = 0;
-
+      let todayRevenue = 0,
+        todayExpense = 0;
+      let currentMonthRevenue = 0,
+        currentMonthExpense = 0;
       let yearlyMonthNetIncome = Array(12).fill(0);
 
       const now = new Date();
       const todayString = now.toISOString().split("T")[0];
       const currentYear = now.getFullYear();
       const currentMonth = now.getMonth();
-
       if (tbody) tbody.innerHTML = "";
 
       transactions.forEach((tx) => {
@@ -100,7 +99,6 @@ document.addEventListener("DOMContentLoaded", () => {
           if (tx.type.toLowerCase() === "expense")
             todayExpense += numericAmount;
         }
-
         if (txYear === currentYear && txMonth === currentMonth) {
           if (tx.type.toLowerCase() === "revenue")
             currentMonthRevenue += numericAmount;
@@ -124,34 +122,31 @@ document.addEventListener("DOMContentLoaded", () => {
             hour: "2-digit",
             minute: "2-digit",
           });
+
           const typeBadgeColor =
             tx.type.toLowerCase() === "revenue" ? "#10b981" : "#ef4444";
-
           tr.innerHTML = `
-            <td>${txDateFormatted}</td>
-            <td>${tx.description}</td>
-            <td><strong>${numericAmount.toLocaleString()}</strong></td>
-            <td><span style="color:${typeBadgeColor};font-weight:600;">${tx.type}</span></td>
-            <td>${txTimeFormatted}</td>
-          `;
+                         <td>${txDateFormatted}</td>
+                        <td>${tx.description}</td>
+                        <td>${numericAmount.toLocaleString()}</td>
+                        <td><span style="color:${typeBadgeColor};font-weight:600;">${tx.type}</span></td>
+                        <td>${txTimeFormatted}</td>
+                        `;
           tbody.appendChild(tr);
         }
       });
-
       if (dashTodaySales)
         dashTodaySales.textContent = todayRevenue.toLocaleString();
       if (dashMonthSales)
         dashMonthSales.textContent = currentMonthRevenue.toLocaleString();
-
       if (revTotalSpan)
         revTotalSpan.textContent = todayRevenue.toLocaleString();
       if (expTotalSpan)
         expTotalSpan.textContent = todayExpense.toLocaleString();
 
       const totalMonthTurnover = currentMonthRevenue + currentMonthExpense;
-      let profitPercentage = 100;
-      let expensePercentage = 0;
-
+      let profitPercentage = 100,
+        expensePercentage = 0;
       if (totalMonthTurnover > 0) {
         profitPercentage = Math.round(
           (currentMonthRevenue / totalMonthTurnover) * 100,
@@ -161,37 +156,37 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (pieProfitPct) pieProfitPct.textContent = profitPercentage;
       if (pieExpensePct) pieExpensePct.textContent = expensePercentage;
-
       if (dashPieChart) {
-        dashPieChart.style.background = `conic-gradient(#6366f1 0% ${profitPercentage}%, #10b981 ${profitPercentage}% 100%)`;
+        dashPieChart.style.background = `conic-gradient(#6366f1 0% ${profitPercentage}%, #f43f5e ${profitPercentage}% 100%)`;
       }
 
       const maxMonthlyNet = Math.max(
         ...yearlyMonthNetIncome.map((val) => Math.abs(val)),
         1000,
       );
+
       const yAxisLabels = document.getElementById("y-axis-labels");
+
       if (yAxisLabels) {
         const step = Math.round(maxMonthlyNet / 5);
         yAxisLabels.innerHTML = `
-          <span>${(step * 5).toLocaleString()}</span>
-          <span>${(step * 4).toLocaleString()}</span>
-          <span>${(step * 3).toLocaleString()}</span>
-          <span>${(step * 2).toLocaleString()}</span>
-          <span>${(step * 1).toLocaleString()}</span>
-          <span>0</span>
-        `;
+
+<span>${(step * 5).toLocaleString()}</span>
+<span>${(step * 4).toLocaleString()}</span>
+<span>${(step * 3).toLocaleString()}</span>
+<span>${(step * 2).toLocaleString()}</span>
+<span>${(step * 1).toLocaleString()}</span>
+<span>0</span>
+`;
       }
+
       yearlyMonthNetIncome.forEach((netIncome, monthIndex) => {
         const barPill = document.querySelector(
           `.bar-pill[data-month="${monthIndex}"]`,
         );
         if (barPill) {
-          let calculatedHeight = 0;
-          if (netIncome > 0) {
-            calculatedHeight = Math.round((netIncome / maxMonthlyNet) * 100);
-          }
-
+          let calculatedHeight =
+            netIncome > 0 ? Math.round((netIncome / maxMonthlyNet) * 100) : 0;
           barPill.style.height = `${calculatedHeight}%`;
           barPill.setAttribute(
             "title",
@@ -212,70 +207,119 @@ document.addEventListener("DOMContentLoaded", () => {
     const revForm = document.getElementById("revenue-form");
     const expForm = document.getElementById("expense-form");
 
-    if (revForm) {
-      revForm.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        const amount = document.getElementById("revenue-amount").value;
-        const description = document.getElementById(
-          "revenue-description",
-        ).value;
+    // 🎯 Added feedbackId to pass your specific "added-revenue" or "added-expense" paragraph elements
+    const submitRecord = async (
+      e,
+      form,
+      amountId,
+      descId,
+      type,
+      activeClass,
+      feedbackId,
+    ) => {
+      e.preventDefault();
 
-        try {
-          const response = await fetch(`${FIN_API_URL}/add`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify({ amount, description, type: "Revenue" }),
-          });
+      const amount = document.getElementById(amountId).value;
+      const description = document.getElementById(descId).value;
+      const statusMessage = document.getElementById(feedbackId);
 
-          if (!response.ok) {
-            const data = await response.json();
-            alert(data.error || "Failed to commit revenue record.");
-          } else {
-            revForm.reset();
-            revForm.classList.remove("revenue-active");
-            await fetchTransactions();
+      try {
+        const response = await fetch(`${FIN_API_URL}/add`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ amount, description, type }),
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          // Render error inline if server crashes or validations fail
+          if (statusMessage) {
+            statusMessage.textContent =
+              data.error || `Failed to commit ${type.toLowerCase()} record.`;
+            statusMessage.style.backgroundColor = "#fef2f2";
+            statusMessage.style.color = "#991b1b";
+            statusMessage.style.border = "1px solid #fca5a5";
+            statusMessage.classList.add("success-active");
+            statusMessage.style.opacity = "1";
           }
-        } catch (err) {
-          console.error(err);
-          alert("Could not process financial connection with server.");
+        } else {
+          form.reset();
+          form.classList.remove(activeClass);
+          await fetchTransactions();
+
+          // 🚀 Trigger Custom Inline Success feedback
+          if (statusMessage) {
+            statusMessage.textContent = `${type} added successfully!`;
+
+            // Apply unique styles depending on transaction context
+            if (type === "Revenue") {
+              statusMessage.style.backgroundColor = "#ecfdf5";
+              statusMessage.style.color = "#065f46";
+              statusMessage.style.border = "1px solid #a7f3d0";
+            } else {
+              statusMessage.style.backgroundColor = "#fef2f2";
+              statusMessage.style.color = "#991b1b";
+              statusMessage.style.border = "1px solid #fca5a5";
+            }
+
+            statusMessage.classList.add("success-active");
+            statusMessage.style.opacity = "1";
+
+            // ⏱️ Gracefully slide out after 3.5 seconds
+            setTimeout(() => {
+              statusMessage.style.opacity = "0";
+              setTimeout(() => {
+                statusMessage.classList.remove("success-active");
+                statusMessage.textContent = "";
+              }, 300);
+            }, 3500);
+          }
         }
-      });
+      } catch (err) {
+        console.error(err);
+        if (statusMessage) {
+          statusMessage.textContent =
+            "Could not process financial connection with server.";
+          statusMessage.style.backgroundColor = "#fef2f2";
+          statusMessage.style.color = "#991b1b";
+          statusMessage.style.border = "1px solid #fca5a5";
+          statusMessage.classList.add("success-active");
+          statusMessage.style.opacity = "1";
+        }
+      }
+    };
+
+    // 🎯 Passed the IDs of your newly introduced markup paragraphs as the final argument
+    if (revForm) {
+      revForm.addEventListener("submit", (e) =>
+        submitRecord(
+          e,
+          revForm,
+          "revenue-amount",
+          "revenue-description",
+          "Revenue",
+          "revenue-active",
+          "added-revenue",
+        ),
+      );
     }
 
     if (expForm) {
-      expForm.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        const amount = document.getElementById("expense-amount").value;
-        const description = document.getElementById(
+      expForm.addEventListener("submit", (e) =>
+        submitRecord(
+          e,
+          expForm,
+          "expense-amount",
           "expense-description",
-        ).value;
-
-        try {
-          const response = await fetch(`${FIN_API_URL}/add`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify({ amount, description, type: "Expense" }),
-          });
-
-          if (!response.ok) {
-            const data = await response.json();
-            alert(data.error || "Failed to commit expense record.");
-          } else {
-            expForm.reset();
-            expForm.classList.remove("expense-active");
-            await fetchTransactions();
-          }
-        } catch (err) {
-          console.error(err);
-          alert("Could not process financial connection with server.");
-        }
-      });
+          "Expense",
+          "expense-active",
+          "added-expense",
+        ),
+      );
     }
   }
 
@@ -288,13 +332,12 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault();
         const submitBtn = document.getElementById("edit-submit-btn");
         if (submitBtn) submitBtn.disabled = true;
-
         const businessName = document
           .getElementById("edit-business-name")
           .value.trim();
+
         const username = document.getElementById("edit-username").value.trim();
         const email = document.getElementById("edit-email").value.trim();
-
         try {
           const response = await fetch(`${API_URL}/update-profile`, {
             method: "PUT",
@@ -304,15 +347,18 @@ document.addEventListener("DOMContentLoaded", () => {
             },
             body: JSON.stringify({ businessName, username, email }),
           });
-
           const data = await response.json();
 
           if (!response.ok) {
             alert(data.error || "Failed to update profile details.");
           } else {
             alert("Account details updated successfully!");
-            const updatedUser = { username, businessName, email };
-            localStorage.setItem("growssify_user", JSON.stringify(updatedUser));
+
+            localStorage.setItem(
+              "growssify_user",
+              JSON.stringify({ username, businessName, email }),
+            );
+
             window.location.reload();
           }
         } catch (err) {
@@ -327,12 +373,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (confirmDeleteBtn) {
       confirmDeleteBtn.addEventListener("click", async (e) => {
         e.preventDefault();
-        if (
-          !confirm(
-            "Are you absolutely sure you want to delete your entire account? This action cannot be undone.",
-          )
-        )
-          return;
+
+        const deleteStatus = document.getElementById("delete-status");
+        if (deleteStatus) deleteStatus.textContent = "";
 
         try {
           const response = await fetch(`${API_URL}/delete-account`, {
@@ -342,16 +385,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
           if (!response.ok) {
             const data = await response.json();
-            alert(data.error || "Failed to delete account processing request.");
+            if (deleteStatus) {
+              deleteStatus.textContent =
+                data.error || "Failed to delete account processing request.";
+              deleteStatus.style.color = "#ef4444";
+            }
           } else {
-            alert("Your account has been permanently removed. Redirecting...");
+            if (deleteStatus) {
+              deleteStatus.textContent =
+                "Your account has been permanently removed. Redirecting...";
+              deleteStatus.style.color = "#10b981";
+            }
+
             localStorage.removeItem("growssify_token");
             localStorage.removeItem("growssify_user");
-            window.location.href = "../login/login.html";
+
+            setTimeout(() => {
+              window.location.href = "../login/login.html";
+            }, 2000);
           }
         } catch (err) {
           console.error(err);
-          alert("Could not bridge connection with the server.");
+          if (deleteStatus) {
+            deleteStatus.textContent =
+              "Could not bridge connection with the server.";
+            deleteStatus.style.color = "#ef4444";
+          }
         }
       });
     }
@@ -359,43 +418,53 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function handleNavigation() {
     navLinks.forEach((link) => {
-      ["click", "touchend"].forEach((eventType) => {
-        link.addEventListener(eventType, function (e) {
-          const targetId = this.getAttribute("href");
-          if (!targetId || !targetId.startsWith("#")) return;
-
-          e.preventDefault();
-          e.stopPropagation();
-
-          navLinks.forEach((l) => l.classList.remove("active"));
-          this.classList.add("active");
-
-          sections.forEach((section) => {
-            if (`#${section.id}` === targetId) {
-              if (window.innerWidth <= 768) {
-                section.style.display = "flex";
-              } else {
-                section.style.display = "grid";
-              }
-            } else {
-              section.style.display = "none";
-            }
-          });
-
-          const sidebar = document.querySelector("aside");
-          const menuIcon = document.getElementById("menu-icon");
-          if (
-            window.innerWidth <= 768 &&
-            sidebar &&
-            sidebar.classList.contains("menu-open")
-          ) {
-            sidebar.classList.remove("menu-open");
-            if (menuIcon) menuIcon.textContent = "menu";
+      link.addEventListener("click", function (e) {
+        const targetId = this.getAttribute("href");
+        if (!targetId || !targetId.startsWith("#")) return;
+        e.preventDefault();
+        navLinks.forEach((l) => l.classList.remove("active"));
+        this.classList.add("active");
+        sections.forEach((section) => {
+          if (`#${section.id}` === targetId) {
+            section.style.display = window.innerWidth <= 768 ? "" : "grid";
+          } else {
+            section.style.display = "none";
           }
         });
+
+        if (window.innerWidth <= 1024) {
+          closeNav();
+        }
       });
     });
   }
+
+  let overlay = document.querySelector(".nav-overlay");
+
+  if (!overlay) {
+    overlay = document.createElement("div");
+    overlay.classList.add("nav-overlay");
+    document.body.appendChild(overlay);
+  }
+
+  function openNav() {
+    aside?.classList.add("nav-open");
+    overlay?.classList.add("active");
+    if (menuIcon) menuIcon.style.setProperty("display", "none", "important");
+    if (closeIcon) closeIcon.style.setProperty("display", "flex", "important");
+  }
+
+  function closeNav() {
+    aside?.classList.remove("nav-open");
+    overlay?.classList.remove("active");
+
+    if (menuIcon) menuIcon.style.setProperty("display", "flex", "important");
+    if (closeIcon) closeIcon.style.setProperty("display", "none", "important");
+  }
+
+  menuIcon?.addEventListener("click", openNav);
+  closeIcon?.addEventListener("click", closeNav);
+  overlay?.addEventListener("click", closeNav);
 
   function setupFormToggles() {
     const revenueBtn = document.getElementById("toggle-revenue-form");
@@ -422,39 +491,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  function setupMobileSidebar() {
-    const menuIcon = document.getElementById("menu-icon");
-    const sidebar = document.querySelector("aside");
-
-    if (!menuIcon || !sidebar) return;
-
-    menuIcon.addEventListener("click", (e) => {
-      e.stopPropagation();
-      sidebar.classList.toggle("menu-open");
-      if (sidebar.classList.contains("menu-open")) {
-        menuIcon.textContent = "close";
-      } else {
-        menuIcon.textContent = "menu";
-      }
-    });
-  }
-
-  fetchUserProfile();
-  fetchTransactions();
-  setupFinancialSubmissions();
-  setupSettingsBackend();
-  handleNavigation();
-  setupFormToggles();
-  setupMobileSidebar();
-
-  const logoutLink = document.querySelector('a[href="../login/login.html"]');
-  if (logoutLink) {
-    logoutLink.addEventListener("click", () => {
-      localStorage.removeItem("growssify_token");
-      localStorage.removeItem("growssify_user");
-    });
-  }
-
   const contactForm = document.getElementById("help-form");
   const formStatus = document.getElementById("form-status");
 
@@ -463,11 +499,9 @@ document.addEventListener("DOMContentLoaded", () => {
       event.preventDefault();
       const submitButton = document.getElementById("help-button");
       if (!submitButton) return;
-
       const originalButtonText = submitButton.textContent;
       submitButton.textContent = "Sending...";
       submitButton.disabled = true;
-
       formStatus.textContent = "";
       formStatus.style.opacity = "1";
 
@@ -475,6 +509,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .sendForm("service_4nu9vxq", "template_qh2hyg1", this)
         .then(() => {
           formStatus.style.color = "#10b981";
+          formStatus.style.fontSize = "15px";
           formStatus.textContent =
             "Message sent successfully! Thank you for reaching out.";
           contactForm.reset();
@@ -482,6 +517,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .catch((error) => {
           console.error("Mail Delivery Failure:", error);
           formStatus.style.color = "#ef4444";
+          formStatus.style.fontSize = "15px";
           formStatus.textContent =
             "Failed to send message. Please try again or email me directly.";
         })
@@ -493,7 +529,7 @@ document.addEventListener("DOMContentLoaded", () => {
             setTimeout(() => {
               formStatus.textContent = "";
             }, 300);
-          }, 5000);
+          }, 3000);
         });
     });
   }
@@ -501,7 +537,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const deleteTriggerBtn = document.getElementById("trigger-delete-btn");
   const deleteAccountBox = document.querySelector(".delete-account");
   const cancelDeleteBtn = document.querySelector(".btn-cancel");
-
   if (deleteTriggerBtn && deleteAccountBox) {
     deleteTriggerBtn.addEventListener("click", (e) => {
       e.preventDefault();
@@ -515,4 +550,19 @@ document.addEventListener("DOMContentLoaded", () => {
       deleteAccountBox.classList.remove("active-warning");
     });
   }
+
+  const logoutLink = document.querySelector('a[href="../login/login.html"]');
+  if (logoutLink) {
+    logoutLink.addEventListener("click", () => {
+      localStorage.removeItem("growssify_token");
+      localStorage.removeItem("growssify_user");
+    });
+  }
+
+  fetchUserProfile();
+  fetchTransactions();
+  setupFinancialSubmissions();
+  setupSettingsBackend();
+  handleNavigation();
+  setupFormToggles();
 });

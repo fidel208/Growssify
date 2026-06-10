@@ -22,7 +22,7 @@
   <body>
     <aside>
       <div class="top">
-        <span class="material-symbols-outlined" id="menu-icon"> menu </span>
+        <span class="material-symbols-outlined" id="menu-close"> close </span>
         <div class="logo-top">
           <img src="../images/Growssify logo-icon.png" alt="Growssify-logo" />
           <h1>Growssify</h1>
@@ -42,13 +42,14 @@
         <a href="#settings"
           ><span class="material-symbols-outlined"> settings </span> Settings</a
         >
-        <a href="../login/login.html"
+        <a href="../login/login.html" id="logout-link"
           ><span class="material-symbols-outlined"> logout </span> Log out</a
         >
       </nav>
     </aside>
     <main>
       <header>
+        <span class="material-symbols-outlined" id="menu-icon"> menu </span>
         <h2 id="welcome-msg">Hello username</h2>
         <div class="user-details">
           <span id="avator"></span>
@@ -107,73 +108,121 @@
             <div class="bar-chart-canvas">
               <div class="chart-column">
                 <div class="bar-wrapper">
-                  <span class="bar-pill" data-month="0" style="height: 0%"></span>
+                  <span
+                    class="bar-pill"
+                    data-month="0"
+                    style="height: 0%"
+                  ></span>
                 </div>
                 <span class="month-label">Jan</span>
               </div>
               <div class="chart-column">
                 <div class="bar-wrapper">
-                  <span class="bar-pill" data-month="1" style="height: 0%"></span>
+                  <span
+                    class="bar-pill"
+                    data-month="1"
+                    style="height: 0%"
+                  ></span>
                 </div>
                 <span class="month-label">Feb</span>
               </div>
               <div class="chart-column">
                 <div class="bar-wrapper">
-                  <span class="bar-pill"data-month="2" style="height: 0"></span>
+                  <span
+                    class="bar-pill"
+                    data-month="2"
+                    style="height: 0"
+                  ></span>
                 </div>
                 <span class="month-label">Mar</span>
               </div>
               <div class="chart-column">
                 <div class="bar-wrapper">
-                  <span class="bar-pill" data-month="3" style="height: 40%"></span>
+                  <span
+                    class="bar-pill"
+                    data-month="3"
+                    style="height: 40%"
+                  ></span>
                 </div>
                 <span class="month-label">Apr</span>
               </div>
               <div class="chart-column">
                 <div class="bar-wrapper">
-                  <span class="bar-pill" data-month="4" style="height: 95%"></span>
+                  <span
+                    class="bar-pill"
+                    data-month="4"
+                    style="height: 95%"
+                  ></span>
                 </div>
                 <span class="month-label">May</span>
               </div>
               <div class="chart-column">
                 <div class="bar-wrapper">
-                  <span class="bar-pill" data-month="5" style="height: 10%"></span>
+                  <span
+                    class="bar-pill"
+                    data-month="5"
+                    style="height: 10%"
+                  ></span>
                 </div>
                 <span class="month-label">Jun</span>
               </div>
               <div class="chart-column">
                 <div class="bar-wrapper">
-                  <span class="bar-pill" data-month="6" style="height: 0%"></span>
+                  <span
+                    class="bar-pill"
+                    data-month="6"
+                    style="height: 0%"
+                  ></span>
                 </div>
                 <span class="month-label">Jul</span>
               </div>
               <div class="chart-column">
                 <div class="bar-wrapper">
-                  <span class="bar-pill" data-month="7" style="height: 0%"></span>
+                  <span
+                    class="bar-pill"
+                    data-month="7"
+                    style="height: 0%"
+                  ></span>
                 </div>
                 <span class="month-label">Aug</span>
               </div>
               <div class="chart-column">
                 <div class="bar-wrapper">
-                  <span class="bar-pill" data-month="8" style="height: 0%"></span>
+                  <span
+                    class="bar-pill"
+                    data-month="8"
+                    style="height: 0%"
+                  ></span>
                 </div>
                 <span class="month-label">Sep</span>
               </div>
               <div class="chart-column">
                 <div class="bar-wrapper">
-                  <span class="bar-pill" data-month="9" style="height: 0"></span>
+                  <span
+                    class="bar-pill"
+                    data-month="9"
+                    style="height: 0"
+                  ></span>
                 </div>
                 <span class="month-label">Oct</span>
               </div>
               <div class="chart-column">
                 <div class="bar-wrapper">
-                  <span class="bar-pill" data-month="10" style="height: 0"></span>
+                  <span
+                    class="bar-pill"
+                    data-month="10"
+                    style="height: 0"
+                  ></span>
                 </div>
                 <span class="month-label">Nov</span>
               </div>
               <div class="chart-column">
                 <div class="bar-wrapper">
-                  <span class="bar-pill" data-month="11" style="height: 0"></span>
+                  <span
+                    class="bar-pill"
+                    data-month="11"
+                    style="height: 0"
+                  ></span>
                 </div>
                 <span class="month-label">Dec</span>
               </div>
@@ -189,6 +238,7 @@
               <p><sup>Kes.</sup><span id="today-revenue-total">0</span></p>
             </div>
             <div class="adds">
+              <p id="added-revenue"></p>
               <button id="toggle-revenue-form" class="add-btn">
                 <span class="material-symbols-outlined"> add </span> Add a
                 revenue
@@ -221,6 +271,7 @@
               <p><sup>Kes.</sup><span id="today-expense-total">0</span></p>
             </div>
             <div class="adds">
+              <p id="added-expense"></p>
               <button id="toggle-expense-form" class="add-btn">
                 <span class="material-symbols-outlined"> add </span> Add an
                 expense
@@ -414,6 +465,7 @@
                 Confirm Deletion
               </button>
             </span>
+            <p id="delete-status"></p>
           </span>
         </article>
       </section>

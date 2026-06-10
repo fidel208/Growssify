@@ -32,13 +32,16 @@ aside {
 #menu-icon {
   display: none;
 }
+#menu-close {
+  display: none;
+}
 .top {
-  padding: 30px;
+  padding-top: 30px;
   height: 15%;
 }
 .logo-top {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
 }
@@ -72,6 +75,13 @@ nav > a:hover {
   background-color: #4f46e5;
   color: white;
   font-weight: bold;
+}
+#logout-link {
+  color: #f43f5e;
+}
+#logout-link:hover {
+  font-weight: normal;
+  color: #f55252;
 }
 .active {
   background-color: #4f46e5;
@@ -235,10 +245,10 @@ header > h2 {
   border-radius: 3px;
 }
 .profit-dot {
-  background-color: #10b981;
+  background-color: #4f46e5;
 }
 .expense-dot {
-  background-color: #4f46e5;
+  background-color: #f43f5e;
 }
 .dash-bottom {
   background-color: #ffffff;
@@ -351,7 +361,7 @@ header > h2 {
   border-radius: 20px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
   padding-left: 50px;
 }
 .day-revenue {
@@ -374,7 +384,7 @@ header > h2 {
   border-radius: 20px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
   padding-left: 50px;
 }
 .day-expense {
@@ -393,7 +403,17 @@ header > h2 {
 .adds {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
+}
+.adds > p {
+  display: block;
+  width: fit-content;
+  padding: 5px;
+  border-radius: 8px;
+  box-sizing: border-box;
+  font-size: 15px;
+  transition: opacity 0.4s ease-in-out;
+  color: #065f46;
 }
 .add-btn {
   max-width: 200px;
@@ -613,7 +633,7 @@ td {
   background-color: white;
   border-radius: 20px;
   display: grid;
-  grid-template-columns: 60% 40%;
+  grid-template-columns: 50% 40%;
   grid-template-rows: 100%;
 }
 .edit {
@@ -732,280 +752,448 @@ td {
 .btn-confirm:hover {
   background-color: #910f2f;
 }
+#delete-status {
+  font-size: 15px;
 
-@media (max-width: 1150px) {
+  display: block;
+}
+#added-revenue.success-active {
+  display: block;
+  background-color: #ecfdf5;
+  color: #065f46;
+  border: 1px solid #a7f3d0;
+}
+
+/* Success State Styles for Expense Card Feedback */
+#added-expense.success-active {
+  display: block;
+  background-color: #fef2f2;
+  color: #991b1b;
+  border: 1px solid #fca5a5;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
   body {
-    font-size: 15px;
-    padding: 0 10px;
-    gap: 10px;
-    width: 100%;
+    gap: 12px;
+    overflow: hidden;
   }
   aside {
-    width: 25%;
-    gap: 50px;
+    width: 22%;
+    gap: 60px;
+  }
+  .logo-top > h1 {
+    font-size: 28px;
   }
   nav {
     padding-left: 10px;
   }
   nav > a {
-    font-size: 22px;
-    padding: 15px;
-    height: 50px;
+    font-size: 20px;
+    height: 52px;
+    padding: 12px;
   }
   main {
-    width: 75%;
+    width: 78%;
+    overflow: hidden;
   }
   header {
-    padding-left: 15px;
-    height: 10%;
+    padding-left: 20px;
   }
   header > h2 {
-    font-size: 25px;
-  }
-  .logo-top {
-    display: flex;
-    flex-direction: column;
-  }
-  .logo-top > h1 {
-    font-size: 30px;
-  }
-  .logo-top > img {
-    width: 45px;
+    font-size: 24px;
   }
   .user-details {
     max-width: 280px;
     gap: 15px;
   }
   #dashboard {
-    grid-template-rows: auto auto;
-    height: 90dvh;
-    overflow-y: auto;
-    padding-bottom: 30px;
+    box-sizing: border-box;
+    gap: 10px;
   }
   .dash-top {
-    flex-direction: column;
-    gap: 20px;
+    gap: 16px;
+    display: flex;
+    flex-direction: row;
   }
   .dash-top > span {
-    width: 100%;
-    max-height: none;
-    padding: 25px;
+    padding: 16px;
+  }
+  .dash-top > span > p,
+  .amount-details > p {
+    font-size: 22px;
+  }
+  .amount-details > i {
+    font-size: 45px;
   }
   .pie-card {
-    display: flex;
-    flex-direction: row !important;
-    justify-content: space-around;
-    align-items: center;
-    width: 100%;
-    gap: 30px;
+    padding: 15px;
   }
   .pie {
-    max-width: 100px;
-    width: 100%;
-    height: 100px;
+    width: 90px;
+    height: 90px;
   }
-  .pie-legend {
-    display: flex;
-    flex-direction: column;
+  .chart-column {
+    width: 7%;
   }
-  .dash-bottom {
-    height: 400px;
-    padding: 20px;
-  }
-
   #finance {
-    grid-template-rows: auto auto;
-    height: auto;
-    overflow-y: auto;
-    padding-bottom: 30px;
-    gap: 5px;
+    gap: 10px;
+    grid-template-rows: auto;
   }
   .payments {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+    gap: 16px;
   }
-  #help {
-    height: 90dvh;
+  .revenue,
+  .expense {
+    padding-left: 24px;
+    max-height: 450px;
+  }
+  .day-revenue > h3,
+  .day-expense > h3 {
+    font-size: 24px;
+  }
+  .day-revenue > p,
+  .day-expense > p {
+    font-size: 20px;
   }
   .contact {
-    grid-template-columns: 100%;
-    grid-template-rows: 50% 50%;
-    gap: 30px;
-  }
-  .contact > form > span > input,
-  .contact > form > span > textarea {
-    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
   }
   #settings {
     grid-template-columns: 100%;
     grid-template-rows: 50% 50%;
-    height: 90dvh;
-    overflow-y: auto;
-    gap: 20px;
-    padding-bottom: 30px;
   }
-  .edit > form {
-    max-width: 100%;
+  .delete {
+    padding: 25px;
   }
 }
 
 @media (max-width: 768px) {
   body {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    margin: 0;
+    flex-direction: column;
+    gap: 0;
+    overflow-x: hidden;
   }
   aside {
-    width: 15%;
-    overflow: hidden;
-    float: left;
-    flex-shrink: 0;
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 260px;
+    height: 100dvh;
+    z-index: 300;
+    gap: 40px;
+    transition: left 0.28s ease;
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.14);
+  }
+  aside.nav-open {
+    left: 0;
   }
   .top {
+    padding-top: 20px;
+    height: auto;
+  }
+  .logo-top > img {
+    width: 44px;
+  }
+  .logo-top > h1 {
+    font-size: 28px;
+  }
+  nav {
+    padding-left: 12px;
+    gap: 8px;
+  }
+  nav > a {
+    font-size: 20px;
+    height: 52px;
+    padding: 12px 16px;
+    max-width: 95%;
+  }
+  .nav-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 299;
+  }
+  .nav-overlay.active {
+    display: block;
+  }
+  main {
+    width: 100%;
+    height: auto;
+    min-height: 100dvh;
+    float: none;
+  }
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 200;
+    background: #f1f5f9;
+    height: 64px;
+    padding: 0 16px;
     display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    padding: 5px;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
   }
   #menu-icon {
     display: flex;
-    font-size: 30px;
-    padding-top: 17px;
-    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    background-color: white;
+    color: #4f46e5;
+    width: 35px;
+    height: 35px;
+    border-radius: 8px;
   }
-  .logo-top {
-    justify-content: flex-start;
-    padding-top: 15px;
+  #menu-icon:hover {
+    font-weight: bold;
   }
-  .logo-top > h1 {
-    display: none;
-  }
-  nav {
-    padding-left: 0;
-  }
-  nav > a {
-    gap: 25px;
-  }
-  main {
+  #menu-close {
     display: flex;
-    flex-direction: column;
-    width: 80;
-    height: auto;
-    flex-grow: 1;
+    font-size: 26px;
+    padding-left: 25px;
+    height: 35px;
+    width: 35px;
+    margin-bottom: 20px;
+    color: #4f46e5;
   }
-  header {
-    display: flex;
-    flex-direction: row;
-    padding: 10;
-    flex-shrink: 0;
+  #menu-close:hover {
+    font-weight: bold;
+  }
+  header > h2 {
+    font-size: 17px;
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .user-details {
+    max-width: 160px;
+    height: 48px;
+    gap: 8px;
+    padding: 0 10px;
+    border-radius: 12px;
+  }
+  #avator {
+    width: 32px;
+    height: 32px;
+  }
+  #names > h3 {
+    font-size: 13px;
+  }
+  #names > p {
+    font-size: 11px;
+  }
+  main > section {
+    margin-top: 64px;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
   }
   #dashboard {
     display: flex;
     flex-direction: column;
+    gap: 14px;
+    height: auto;
+    padding: 16px 12px 24px;
+  }
+  .dash-top {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .dash-top > span {
     width: 100%;
-    gap: 10px;
+    height: 100%;
+    border-radius: 16px;
   }
-  .user-details {
-    display: none;
+  .amount-details > i {
+    font-size: 38px;
   }
-  .payment-details {
-    width: auto;
-  }
-  .payment-details > h3 {
+  .amount-details > p {
     font-size: 20px;
   }
   .dash-top > span > p {
     font-size: 20px;
   }
-  .amount-details > p {
-    font-size: 20px;
+  .pie {
+    width: 88px;
+    height: 88px;
   }
-  .amount-details > i {
-    font-size: 40px;
+  .dash-bottom {
+    border-radius: 16px;
+    padding: 14px;
+    height: 400px;
+  }
+  .chart-header h3 {
+    font-size: 15px;
+  }
+  .y-axis-labels {
+    width: 28px;
+  }
+  .y-axis-labels span {
+    font-size: 9px;
+  }
+  .month-label {
+    font-size: 8px;
+    margin-top: 5px;
+  }
+  .bar-pill {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+  #finance {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    height: auto;
+    padding: 16px 12px 24px;
+  }
+  .payments {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .revenue,
+  .expense {
+    padding: 16px 18px;
+    border-radius: 16px;
   }
   .day-revenue > h3,
   .day-expense > h3 {
     font-size: 20px;
   }
-  .pie-card {
-    display: flex;
-    flex-direction: column !important;
-    height: auto;
-  }
-  #finance {
-    display: flex;
-    flex-direction: column;
-    height: auto;
+  .day-revenue > p,
+  .day-expense > p {
+    font-size: 18px;
   }
   .adds > form {
-    padding: 0;
+    padding-left: 20px;
+    max-width: 90%;
+  }
+  .adds > form > span > input {
+    max-width: 100%;
+  }
+  .adds > form > span > textarea {
+    max-width: 100%;
+  }
+  .add-btn {
+    max-width: 100%;
+    width: 90%;
+    font-size: 16px;
+  }
+  .payment-details {
+    border-radius: 16px;
+    padding: 14px;
+    max-height: 280px;
+    overflow: hidden;
+  }
+  .payment-details > h3 {
+    font-size: 17px;
+  }
+  table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+  }
+  thead {
+    display: table-header-group;
+  }
+  tbody {
+    display: table-row-group;
+  }
+  tr {
+    display: table-row;
+  }
+  th,
+  td {
+    display: table-cell;
+    white-space: nowrap;
+    padding: 9px 8px;
+    font-size: 13px;
   }
   #help {
     display: flex;
     flex-direction: column;
-    height: 100%;
-    gap: 15px;
+    gap: 16px;
+    height: 100dvh;
+    border-radius: 16px;
+    padding: 16px 12px 24px;
   }
   #help > p {
-    padding: 10px 0 0 0 !important;
-    font-size: 20px !important;
-    font-weight: bold;
-    color: #0f172a;
+    font-size: 23px;
+    padding: 0;
   }
   .contact {
-    width: 100% !important;
-    padding: 10px 0 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 30px !important;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 0;
   }
   .contact > form {
-    width: 100% !important;
-    max-width: 100% !important;
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 15px !important;
-  }
-  .contact > form > span {
-    width: 100% !important;
+    max-width: 90%;
+    padding: 20px;
   }
   .contact > form > span > input,
   .contact > form > span > textarea {
-    max-width: 100% !important;
-    width: 100% !important;
-    font-size: 16px !important;
-  }
-  .contact > form > button {
     max-width: 100%;
-    width: 100%;
   }
   .admin {
-    width: 100%;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    align-items: flex-start;
+    padding: 20px;
+    gap: 18px;
+    height: 100%;
   }
   .admin > a {
-    font-size: 18px;
-    width: 100%;
-    white-space: nowrap;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    font-size: 20px;
   }
   #settings {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    height: auto;
+    border-radius: 16px;
+    padding: 16px 12px 24px;
+  }
+  .edit {
+    padding: 18px 14px;
+  }
+  .edit > p {
+    font-size: 25px;
   }
   .edit > form {
-    padding: 0;
+    max-width: 90%;
+    padding: 10px 0;
+  }
+  .edit > form > span > input {
+    font-size: 16px;
+  }
+  .edit > form > button {
+    max-width: 100%;
+    width: 100%;
+    font-size: 19px;
   }
   .delete {
-    padding: 20px;
+    max-width: 90%;
+    padding: 18px 14px;
+  }
+  #trigger-delete-btn {
+    width: 100%;
+    max-width: 100%;
+    font-size: 16px;
+  }
+  .delete-actions {
+    flex-direction: row;
+    gap: 10px;
+  }
+  .btn-cancel,
+  .btn-confirm {
+    width: 100%;
+    padding: 13px;
+    height: 50px;
+    font-size: 16px;
+    text-align: center;
   }
 }

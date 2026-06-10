@@ -26,6 +26,7 @@ signupForm.addEventListener("submit", async (e) => {
   const businessName = document.getElementById("business-name").value;
   const username = document.getElementById("username").value;
   const password = document.getElementById("signup-pass").value;
+  const signupStatus = document.getElementById("signup-status");
 
   try {
     const response = await fetch(`${API_URL}/signup`, {
@@ -37,16 +38,32 @@ signupForm.addEventListener("submit", async (e) => {
     const data = await response.json();
 
     if (!response.ok) {
-      alert(data.error || "Signup failed");
+      if (signupStatus) {
+        signupStatus.textContent = data.error || "Signup failed.";
+        signupStatus.style.color = "#ef4444";
+      } else {
+        alert(data.error || "Signup failed");
+      }
     } else {
-      alert("Account configured successfully! Redirecting to sign in...");
-      signupForm.reset();
-      signupCont.classList.add("hidden");
-      loginCont.classList.remove("hidden");
+      if (signupStatus) {
+        signupStatus.textContent =
+          "Account created successfully, redirecting...";
+        signupStatus.style.color = "#10b981";
+      }
+
+      setTimeout(() => {
+        signupForm.reset();
+        if (signupStatus) signupStatus.textContent = "";
+        signupCont.classList.add("hidden");
+        loginCont.classList.remove("hidden");
+      }, 1500);
     }
   } catch (err) {
     console.error(err);
-    alert("Could not bridge connection with the server.");
+    if (signupStatus) {
+      signupStatus.textContent = "Could not bridge connection with the server.";
+      signupStatus.style.color = "#ef4444";
+    }
   }
 });
 
@@ -55,6 +72,7 @@ loginForm.addEventListener("submit", async (e) => {
 
   const email = document.getElementById("login-email").value;
   const password = document.getElementById("login-pass").value;
+  const loginStatus = document.getElementById("login-status");
 
   try {
     const response = await fetch(`${API_URL}/login`, {
@@ -66,8 +84,17 @@ loginForm.addEventListener("submit", async (e) => {
     const data = await response.json();
 
     if (!response.ok) {
-      alert(data.error || "Login verification failed");
+      if (loginStatus) {
+        loginStatus.textContent = data.error || "Login verification failed.";
+        loginStatus.style.color = "#ef4444";
+      }
     } else {
+      if (loginStatus) {
+        loginStatus.textContent =
+          "Logging you in...";
+        loginStatus.style.color = "#10b981";
+      }
+
       localStorage.setItem("growssify_token", data.token);
 
       const processedUser = {
@@ -80,10 +107,15 @@ loginForm.addEventListener("submit", async (e) => {
 
       localStorage.setItem("growssify_user", JSON.stringify(processedUser));
 
-      window.location.href = "../dashboard/dash.html";
+      setTimeout(() => {
+        window.location.href = "../dashboard/dash.html";
+      }, 1500);
     }
   } catch (err) {
     console.error(err);
-    alert("Could not bridge connection with the server.");
+    if (loginStatus) {
+      loginStatus.textContent = "Could not bridge connection with the server.";
+      loginStatus.style.color = "#ef4444";
+    }
   }
 });

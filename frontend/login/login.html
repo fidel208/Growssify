@@ -14,7 +14,7 @@
   <body>
     <article class="auth-container">
       <section id="left-cont">
-        <img src="../images/illust.svg" alt="illustration" width="40%">
+        <img src="../images/illust.svg" alt="illustration" width="40%" />
         <p><b>Welcome to Growssify.</b></p>
         <p>
           Turn your daily transactional data into clear, actionable growth
@@ -23,9 +23,14 @@
       </section>
       <section id="login">
         <div class="login">
-          <img id="logo-pic" src="../images/Growssify logo-icon.png" alt="growssify icon" />
+          <img
+            id="logo-pic"
+            src="../images/Growssify logo-icon.png"
+            alt="growssify icon"
+          />
           <p>Welcome back</p>
           <form method="get" id="login-form">
+            <p id="login-status"></p>
             <span>
               <label for="login-email">Email Address</label>
               <input
@@ -46,7 +51,8 @@
             </span>
             <button type="submit">Login</button>
             <p>
-              Don't have an account? <b><a href="" id="create-link">Sign up</a></b>
+              Don't have an account?
+              <b><a href="" id="create-link">Sign up</a></b>
             </p>
           </form>
         </div>
@@ -62,6 +68,7 @@
             <p>Create an account</p>
           </div>
           <form method="post" id="signup-form">
+            <p id="signup-status"></p>
             <span>
               <label for="signup-email">Email Address</label>
               <input type="email" name="signup-email" id="signup-email" />
