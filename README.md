@@ -3,7 +3,7 @@ Growssify is a clean, intuitive, full-stack financial dashboard application engi
 
 By bridging real-time data inputs with automated metrics tracking, the application eliminates complex bookkeeping, letting business owners focus on scaling their operations.
 
-## ✨ Key Features
+## Key Features
 
 * **Real-Time Cash Flow Tracking:** Instantly log single-source business operations under distinct `Revenue` and `Expense` ledger headers.
 * **Dynamic Interactive KPI Cards:** View localized snapshot data metric components showing **Today's Sales** and **Monthly Balance Turnover**.
