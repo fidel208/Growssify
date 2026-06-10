@@ -293,7 +293,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     };
 
-    // 🎯 Passed the IDs of your newly introduced markup paragraphs as the final argument
     if (revForm) {
       revForm.addEventListener("submit", (e) =>
         submitRecord(

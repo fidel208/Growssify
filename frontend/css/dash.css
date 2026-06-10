@@ -764,7 +764,6 @@ td {
   border: 1px solid #a7f3d0;
 }
 
-/* Success State Styles for Expense Card Feedback */
 #added-expense.success-active {
   display: block;
   background-color: #fef2f2;

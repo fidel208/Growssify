@@ -90,8 +90,7 @@ loginForm.addEventListener("submit", async (e) => {
       }
     } else {
       if (loginStatus) {
-        loginStatus.textContent =
-          "Logging you in...";
+        loginStatus.textContent = "Logging you in...";
         loginStatus.style.color = "#10b981";
       }
 
@@ -117,5 +116,32 @@ loginForm.addEventListener("submit", async (e) => {
       loginStatus.textContent = "Could not bridge connection with the server.";
       loginStatus.style.color = "#ef4444";
     }
+  }
+});
+
+const showBox = document.getElementById("checkbox");
+
+showBox.addEventListener("change", function () {
+  const loginPassword = document.getElementById("login-pass");
+  loginPassword.type = loginPassword.type === "password" ? "text" : "password";
+});
+
+const confirmPassword = document.getElementById("confirm-pass");
+const password = document.getElementById("signup-pass");
+
+confirmPassword.addEventListener("input", function () {
+  const showMessage = document.getElementById("show-message");
+
+  if (confirmPassword.value === "") {
+    showMessage.textContent = "";
+    return;
+  }
+
+  if (confirmPassword.value === password.value) {
+    showMessage.textContent = "Passwords match";
+    showMessage.style.color = "#10b981";
+  } else {
+    showMessage.textContent = "Passwords do not match";
+    showMessage.style.color = "#ef4444";
   }
 });

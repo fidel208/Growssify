@@ -54,17 +54,23 @@ body {
   width: 100%;
 }
 .login {
-  padding: 30px;
+  padding-top: 0;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
   width: auto;
+}
+.login-words {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 }
 #logo-pic {
   width: 70px;
 }
-.login > p {
+.login-words > p {
   font-size: 30px;
   font-weight: bold;
   color: #0f172a;
@@ -137,7 +143,7 @@ a:hover {
 }
 .signup {
   padding-top: 0;
-  padding: 30px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -189,6 +195,28 @@ a:hover {
   padding: 10px;
   font-size: 20px;
 }
+.signup-passwords {
+  display: grid;
+  grid-template-columns: 40% 40%;
+  grid-template-rows: 100%;
+  width: 100%;
+  gap: 20px;
+}
+.signup-passwords > span {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.signup-passwords > span > input {
+  height: 30px;
+  border-radius: 12px;
+  width: 90%;
+  border: none;
+  outline: none;
+  background-color: white;
+  padding: 10px;
+  font-size: 20px;
+}
 .signup > form > span > input {
   height: 30px;
   border-radius: 12px;
@@ -213,7 +241,6 @@ a:hover {
   color: white;
   background-color: #4f46e5;
   font-size: 20px;
-  margin-top: 10px;
 }
 .signup > form > button:hover {
   background-color: #3730a3;
@@ -227,6 +254,21 @@ a:hover {
   display: block;
   min-height: 20px;
 }
+#show {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+#show > input {
+  height: 20px;
+  width: 20px;
+  border: none;
+  outline: none;
+}
+#show-message {
+  font-size: 15px;
+}
+
 @media (max-width: 1024px) {
   .auth-container {
     width: 90%;
@@ -238,6 +280,23 @@ a:hover {
   .login > form,
   .signup > form {
     padding-left: 20px;
+  }
+  .signup > form > span > input {
+    width: 95%;
+  }
+  .signup-names {
+    display: grid;
+    grid-template-columns: 47% 47%;
+    grid-template-rows: 100%;
+    width: 100%;
+    gap: 15px;
+  }
+  .signup-passwords {
+    display: grid;
+    grid-template-columns: 47% 47%;
+    grid-template-rows: 100%;
+    width: 100%;
+    gap: 15px;
   }
 }
 
@@ -308,6 +367,13 @@ a:hover {
     box-sizing: border-box;
     font-size: 16px;
     height: 40px;
+  }
+  .signup-passwords {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 100%;
+    width: 100%;
+    gap: 15px;
   }
   .login > form > button,
   .signup > form > button {

@@ -23,12 +23,14 @@
       </section>
       <section id="login">
         <div class="login">
-          <img
-            id="logo-pic"
-            src="../images/Growssify logo-icon.png"
-            alt="growssify icon"
-          />
-          <p>Welcome back</p>
+          <div class="login-words">
+            <img
+              id="logo-pic"
+              src="../images/Growssify logo-icon.png"
+              alt="growssify icon"
+            />
+            <p>Welcome back</p>
+          </div>
           <form method="get" id="login-form">
             <p id="login-status"></p>
             <span>
@@ -48,6 +50,10 @@
                 id="login-pass"
                 required
               />
+            </span>
+            <span id="show">
+              <input type="checkbox" name="checkbox" id="checkbox" />
+              <label for="checkbox">Show Password</label>
             </span>
             <button type="submit">Login</button>
             <p>
@@ -73,20 +79,27 @@
               <label for="signup-email">Email Address</label>
               <input type="email" name="signup-email" id="signup-email" />
             </span>
-            <span>
-              <label for="business-name">Business Name</label>
-              <input type="text" name="business-name" id="business-name" />
-            </span>
             <div class="signup-names">
+              <span>
+                <label for="business-name">Business Name</label>
+                <input type="text" name="business-name" id="business-name" />
+              </span>
               <span>
                 <label for="username">Username</label>
                 <input type="text" name="username" id="username" />
               </span>
+            </div>
+            <div class="signup-passwords">
               <span>
                 <label for="signup-pass">Password</label>
                 <input type="password" name="signup-pass" id="signup-pass" />
               </span>
+              <span>
+                <label for="confirm-pass">Confirm Password</label>
+                <input type="password" name="confirm-pass" id="confirm-pass" />
+              </span>
             </div>
+            <p id="show-message"></p>
             <button type="submit">Sign up</button>
             <p>
               Have an account <b><a href="" id="login-link">Sign in</a></b>
