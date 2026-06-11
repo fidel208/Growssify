@@ -257,11 +257,9 @@ document.addEventListener("DOMContentLoaded", () => {
           form.classList.remove(activeClass);
           await fetchTransactions();
 
-          // 🚀 Trigger Custom Inline Success feedback
           if (statusMessage) {
             statusMessage.textContent = `${type} added successfully!`;
 
-            // Apply unique styles depending on transaction context
             if (type === "Revenue") {
               statusMessage.style.backgroundColor = "#ecfdf5";
               statusMessage.style.color = "#065f46";
@@ -275,7 +273,6 @@ document.addEventListener("DOMContentLoaded", () => {
             statusMessage.classList.add("success-active");
             statusMessage.style.opacity = "1";
 
-            // ⏱️ Gracefully slide out after 3.5 seconds
             setTimeout(() => {
               statusMessage.style.opacity = "0";
               setTimeout(() => {
@@ -351,7 +348,7 @@ document.addEventListener("DOMContentLoaded", () => {
               "Content-Type": "application/json",
               Authorization: `Bearer ${token}`,
             },
-            body: JSON.stringify({ businessName, username, email }),
+            body: JSON.stringify({ businessName, email, username }),
           });
           const data = await response.json();
 
