@@ -381,4 +381,10 @@ a:hover {
     font-size: 18px;
     box-sizing: border-box;
   }
+  label {
+    font-size: 14px;
+  }
+  #show-message {
+    font-size: 14px;
+  }
 }
