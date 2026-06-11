@@ -9,8 +9,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const closeIcon = document.getElementById("menu-close");
   const nav = document.querySelector("aside nav");
 
-  const API_URL = "http://localhost:5000/api/auth";
-  const FIN_API_URL = "http://localhost:5000/api/finance";
+  const API_URL = "https://growssify-backend.onrender.com/api/auth";
+  const FIN_API_URL = "https://growssify-backend.onrender.com/api/finance";
+
+  // const API_URL = "http://localhost:5000/api/auth";
+  // const FIN_API_URL = "http://localhost:5000/api/finance";
   const token = localStorage.getItem("growssify_token");
 
   function initSectionViews() {
@@ -368,7 +371,8 @@ document.addEventListener("DOMContentLoaded", () => {
           }
         } catch (err) {
           console.error(err);
-          editStatus.textContent = "Could not bridge connection with the server.";
+          editStatus.textContent =
+            "Could not bridge connection with the server.";
         } finally {
           if (submitBtn) submitBtn.disabled = false;
         }

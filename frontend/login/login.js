@@ -5,7 +5,10 @@ const signupCont = document.getElementById("signup");
 const loginForm = document.getElementById("login-form");
 const signupForm = document.getElementById("signup-form");
 
-const API_URL = "http://localhost:5000/api/auth";
+// const API_URL = "http://localhost:5000/api/auth";
+
+const API_URL = "https://growssify-backend.onrender.com/api/auth";
+const FIN_API_URL = "https://growssify-backend.onrender.com/api/finance";
 
 createLink.addEventListener("click", (e) => {
   e.preventDefault();
