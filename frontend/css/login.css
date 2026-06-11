@@ -375,6 +375,10 @@ a:hover {
     width: 100%;
     gap: 15px;
   }
+  .signup-passwords > span > input {
+    height: 40px;
+    font-size: 18px;
+  }
   .login > form > button,
   .signup > form > button {
     width: 100%;
