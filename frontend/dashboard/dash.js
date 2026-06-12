@@ -163,7 +163,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (pieProfitPct) pieProfitPct.textContent = profitPercentage;
       if (pieExpensePct) pieExpensePct.textContent = expensePercentage;
       if (dashPieChart) {
-        dashPieChart.style.background = `conic-gradient(#6366f1 0% ${profitPercentage}%, #f43f5e ${profitPercentage}% 100%)`;
+        dashPieChart.style.background = `conic-gradient(#3730a3 0% ${profitPercentage}%, #f43f5e ${profitPercentage}% 100%)`;
       }
 
       const maxMonthlyNet = Math.max(
@@ -213,7 +213,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const revForm = document.getElementById("revenue-form");
     const expForm = document.getElementById("expense-form");
 
-    // 🎯 Added feedbackId to pass your specific "added-revenue" or "added-expense" paragraph elements
     const submitRecord = async (
       e,
       form,
@@ -242,7 +241,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const data = await response.json();
 
         if (!response.ok) {
-          // Render error inline if server crashes or validations fail
           if (statusMessage) {
             statusMessage.textContent =
               data.error || `Failed to commit ${type.toLowerCase()} record.`;
@@ -456,7 +454,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function openNav() {
     aside?.classList.add("nav-open");
     overlay?.classList.add("active");
-    if (menuIcon) menuIcon.style.setProperty("display", "none", "important");
+    if (menuIcon) menuIcon.style.setProperty("display", "important");
     if (closeIcon) closeIcon.style.setProperty("display", "flex");
   }
 

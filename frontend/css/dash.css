@@ -156,7 +156,7 @@ header > h2 {
   gap: 30px;
 }
 .dash-top > span {
-  width: 350px;
+  width: 300px;
   max-height: 250px;
   height: 100%;
   background-color: white;
@@ -245,7 +245,7 @@ header > h2 {
   border-radius: 3px;
 }
 .profit-dot {
-  background-color: #4f46e5;
+  background-color: #3730a3;
 }
 .expense-dot {
   background-color: #f43f5e;
@@ -345,23 +345,22 @@ header > h2 {
   display: grid;
   height: 85%;
   grid-template-columns: 100%;
-  grid-template-rows: 55% 40%;
+  grid-template-rows: 60% 37%;
   gap: 20px;
 }
 .payments {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  gap: 30px;
+  gap: 15px;
 }
 .revenue {
   background-color: white;
-  padding: 30px;
+  padding: 15px 30px;
   flex-grow: 1;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
   padding-left: 50px;
 }
 .day-revenue {
@@ -379,12 +378,11 @@ header > h2 {
 }
 .expense {
   background-color: white;
-  padding: 30px;
+  padding: 15px 30px;
   flex-grow: 1;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
   padding-left: 50px;
 }
 .day-expense {
@@ -403,7 +401,7 @@ header > h2 {
 .adds {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 .adds > p {
   display: block;
@@ -441,13 +439,13 @@ header > h2 {
   pointer-events: none;
 }
 #revenue-form.revenue-active {
-  opacity: 1 !important;
-  pointer-events: auto !important;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 #expense-form.expense-active {
-  opacity: 1 !important;
-  pointer-events: auto !important;
+  opacity: 1;
+  pointer-events: auto;
 }
 .adds > form > span {
   display: flex;
@@ -483,6 +481,9 @@ header > h2 {
   font-size: 20px;
   align-self: flex-end;
   margin-top: 10px;
+}
+.adds > form > button:hover {
+  background-color: #0c7552;
 }
 .payment-details {
   background-color: white;
@@ -522,7 +523,7 @@ header > h2 {
   font-size: 16px;
 }
 #export-btn:hover {
-  background-color: #065f46;
+  background-color: #04af76;
 }
 .payment-details > p {
   font-size: 18px;
@@ -748,9 +749,15 @@ td {
 .delete-account.active-warning {
   opacity: 1;
   pointer-events: auto;
+  font-weight: normal;
+}
+.delete-account > p {
+  color: #0f172a;
+}
+.delete-account > ul {
+  color: #475569;
 }
 .warning-lead {
-  font-weight: 600;
   color: #9f1239;
   margin: 10px 0 5px 0;
 }
@@ -785,7 +792,6 @@ td {
 }
 #delete-status {
   font-size: 15px;
-
   display: block;
 }
 #added-revenue.success-active {
@@ -993,7 +999,7 @@ td {
     height: 35px;
     width: 35px;
     margin-bottom: 20px;
-    color: #4f46e5;
+    color: #3730a3;
   }
   #menu-close:hover {
     font-weight: bold;
