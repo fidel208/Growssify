@@ -50,4 +50,11 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   }
+
+  function getYear() {
+    const yearText = document.getElementById("year");
+
+    yearText.textContent = new Date().getFullYear();
+  }
+  getYear();
 });
