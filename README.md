@@ -15,12 +15,12 @@ By bridging real-time data inputs with automated metrics tracking, the applicati
 
 ## Tech Stack Architecture
 
-### Frontend (Client Interface)
+### Frontend
 * **Structure & Styling:** Semantic HTML5, CSS3 Custom Properties (Variables), and CSS Media Queries for fluid, screen-pinned responsive layouts.
 * **Behavior Engine:** Vanilla JavaScript (ES6+) utilizing decoupled asynchronous Fetch API modules, complete state synchronization patterns, and unified single-page application (SPA) routing blocks.
 * **Third-Party Engines:** FontAwesome Vector Typography Icons, Google Material Symbols Layout Libraries, and EmailJS integrated support pathways.
 
-### Backend (Server Infrastructure)
+### Backend
 * **Runtime Environment:** Node.js
 * **Web Framework:** Express.js (Model-View-Controller request matching pattern)
 * **Database Engine:** PostgreSQL (Relational schema architectures)
